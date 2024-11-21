@@ -1,0 +1,38 @@
+extends layout 
+
+block main 
+  if budgetLists === undefined || budgetLists.length === 0
+    p#no_list You don't have any budget yet.
+  else
+    table 
+      thead 
+        th Year Month
+        th Total Cost
+      tbody 
+        each budgetList in budgetLists 
+          tr           
+            td 
+              a(href=`/budget/${budgetList.title}`) #{budgetList.title}
+            td= budgetList.total
+            td 
+              form.delete(action=`/budget/${budgetList.title}/delete` method="post")
+                button Delete
+
+    if total !== undefined 
+      h2 The total cost of #{year} is #{total}.
+    form(action=`/budget/${year}/total` method="post")
+      dl 
+        dt 
+          label(for="year") Enter the year you need to calculate: 
+        dd 
+          input(type="text"
+                name="year"
+                id="year"
+                placeholder="e.g., 2024"
+                value=year)
+      fieldset.actions 
+        button Calculate
+block headerlinks 
+  .actions 
+    a.add(href="/budget/new") New Budget List
+      

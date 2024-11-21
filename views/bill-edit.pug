@@ -1,0 +1,29 @@
+extends layout 
+
+block main 
+  header
+    h2 Editing '#{bill.category}'
+  form(action=`/budget/${budgetList.title}/${bill.category}/edit` method="post")
+    dl 
+      dt 
+        label(for="newCategory") Enter the new category for the bill: 
+      dd 
+        input(type="text"
+              name="newCategory"
+              id="newCategory"
+              value= newCategory || bill.category)
+    dl 
+      dt 
+        label(for="newCost") Enter the new value for the bill's cost: 
+      dd 
+        input(type="text"
+              name="newCost"
+              id="newCost"
+              value=newCost || bill.cost)
+    fieldset.actions 
+      input(type="submit" value="Save")
+      a(href=`/budget/${budgetList.title}`) Cancel
+
+block headerlinks 
+  .actions 
+    a.list(href=`/budget/${budgetList.title}`) All Bills 

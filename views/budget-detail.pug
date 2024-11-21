@@ -1,0 +1,52 @@
+extends layout 
+
+block main 
+  h2= budgetList.title 
+  table 
+    thead 
+      tr 
+        th Category 
+        th Cost 
+    
+    tbody 
+      if budgetList.bills !== undefined
+        each bill in budgetList.bills
+          tr 
+            td= bill.category
+            td= bill.cost
+            td 
+              form(action=`/budget/${budgetList.title}/${bill.category}/edit` method="get")
+                button.edit(type="submit")
+            td 
+              form.delete(action=`/budget/${budgetList.title}/${bill.category}/delete` method="post")
+                button Delete
+    tfoot 
+      tr 
+        td Total 
+        td= budgetList.total
+
+  form(action=`/budget/${budgetList.title}` method="post")
+    dl 
+      dt 
+        label(for="category") Enter a new bill category: 
+      dd 
+        input(type="text"
+              name="category"
+              id="category"
+              placeholder="Housing, Transportation, Food..."
+              value=category)
+    dl 
+      dt 
+        label(for="cost") Enter the cost: 
+      dd 
+        input(type="text"
+              name="cost"
+              id="cost"
+              value=cost) 
+    fieldset.actions 
+      button Add
+
+block headerlinks 
+  .actions 
+    a.list(href="/budget") All budget lists
+          

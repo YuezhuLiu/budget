@@ -1,0 +1,27 @@
+extends layout 
+
+block main 
+  h2 Create A New Budget
+  form(action="/budget/new" method="post")
+    dl 
+      dt 
+        label(for="year") Year: 
+      dd 
+        input(type="text"
+              id="year"
+              name="year"
+              placeholder="####"
+              value=year)
+    dl   
+      dt 
+        label(for="month") Month: 
+      dd 
+        select(name="month" id="month") 
+          - let months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+            each month in months 
+              option(value=month) #{month}
+
+      
+      fieldset.actions
+        input(type="submit" value="Save")
+        a(href="/budget") Cancel

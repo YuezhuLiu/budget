@@ -1,0 +1,23 @@
+doctype html 
+
+html(lang="en-US")
+  head 
+    title Budget Tracking App 
+    meta(charset="UTF-8")
+    link(rel="stylesheet" href="/stylesheets/application.css")
+    link(rel="stylesheet" href="/stylesheets/whitespace-reset.css")
+    script(src="/javascripts/application.js")
+  body 
+    header 
+      h1 Monthly Budget Tracker 
+      block headerlinks 
+
+    - let messageTypes = Object.keys(flash || {})
+    if messageTypes.length > 0
+      ul
+        each messageType in messageTypes 
+          each message in flash[messageType]
+            li.flash(class=messageType)= message
+
+    main 
+      block main 
